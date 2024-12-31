@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dark Themed Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: linear-gradient(#000000, #6A0DAD , #1F1A3D);
+            
+            
+            color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            
+            
+            background-image: linear-gradient(#000000,#2E1A47, #763db7,#6c3ebd );
+            
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            color: #9c88ff;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #dcdde1;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background: #1e1e36;
+            
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .form-group input[type="radio"] {
+            width: auto;
+            margin-right: 5px;
+        }
+
+        .form-group .radio-label {
+            margin-right: 15px;
+            color: #dcdde1;
+            font-size: 14px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: #3a2463;
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #8c7ae6;
+        }
+
+        .form-group input:focus {
+            outline: 2px solid #9c88ff;
+            background: #2f2f5a;
+        }
+
+        .form-container {
+            margin: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h2>User Registration</h2>
+        <form id="userForm">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required placeholder="Enter your username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required placeholder="Enter your password">
+            </div>
+
+            <div class="form-group">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required>
+            </div>
+
+            <div class="form-group">
+                <label>Gender:</label>
+                <label class="radio-label">
+                    <input type="radio" name="gender" value="male" required> Male
+                </label>
+                <label class="radio-label">
+                    <input type="radio" name="gender" value="female" required> Female
+                </label>
+            </div>
+
+            <div class="form-group">
+                <label for="number">Phone Number:</label>
+                <input type="number" id="number" name="number" required placeholder="Enter your phone number">
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+        </form>
+    </div>
+
+    <script>
+    
+    document.getElementById('userForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        
+        const formData = new FormData(this);
+        const userData = {};
+
+        formData.forEach((value, key) => {
+            userData[key] = value;
+        });
+
+  
+        localStorage.setItem('userData', JSON.stringify(userData));
+
+        console.log('Form Data Stored in Local Storage:', userData);
+        alert('Form submitted successfully!');
+    });
+    </script>
+    <!-- <script>
+        document.getElementById('userForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            
+            const formData = new FormData(this);
+            const userData = {};
+    
+            formData.forEach((value, key) => {
+                userData[key] = value;
+            });
+    
+            // Store the data in local storage
+            localStorage.setItem('userData', JSON.stringify(userData));
+    
+            // Send the data to the server
+            try {
+                const response = await fetch('http://localhost:3000/saveData', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userData)
+                });
+    
+                if (response.ok) {
+                    alert('Data saved successfully to the server!');
+                } else {
+                    alert('Failed to save data to the server.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred while saving data to the server.');
+            }
+        });
+    </script> -->
+    
+</body>
+</html>
+
+
+<!-- const storedData = JSON.parse(localStorage.getItem('userData'));
+console.log('Retrieved Data:', storedData); -->
